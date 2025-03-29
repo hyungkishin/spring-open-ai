@@ -1,6 +1,7 @@
 package com.myai.openai.ui;
 
 import com.myai.openai.application.ChatService;
+import com.myai.openai.entity.Answer;
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,19 +24,29 @@ public class ChatController {
         return chatService.chat(message);
     }
 
-    @GetMapping("/chatmessage")
+    @GetMapping("/chat-message")
     public String chatMessage(@RequestParam("message") String message) {
         return chatService.chatMessage(message);
     }
 
-    @GetMapping("/chatplace")
+    @GetMapping("/chat-place")
     public String chatPlaceMessage(@ModelAttribute ChatRequest request) {
         return chatService.chatPlaceMessage(request);
     }
 
-    @GetMapping("/chatjson")
+    @GetMapping("/chat-json")
     public ChatResponse chatJsonMessage(@RequestParam("message") String message) {
         return chatService.chatJsonMessage(message);
+    }
+
+    @GetMapping("/chat-object")
+    public Answer chatObject(@RequestParam("message") String message) {
+        return chatService.chatObject(message);
+    }
+
+    @GetMapping("/recipe")
+    public Answer recipe(String foodName, String question) {
+        return chatService.recipe(foodName, question);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.myai.openai.application;
 
+import com.myai.openai.entity.Answer;
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -50,6 +51,27 @@ public class ChatService {
                 .user(message)
                 .call()
                 .chatResponse();
+    }
+
+    public Answer chatObject(String message) {
+        return chatClient.prompt()
+                .user(message)
+                .call()
+                .entity(Answer.class);
+    }
+
+    public Answer recipe(String foodName, String question) {
+        String recipeTemplate = """
+                Answer for {foodName} for {question} ?
+                """;
+
+        return chatClient.prompt()
+                .user(userSpec -> userSpec.text(recipeTemplate)
+                        .param("foodName", foodName)
+                        .param("question", question)
+                )
+                .call()
+                .entity(Answer.class);
     }
 
 }
