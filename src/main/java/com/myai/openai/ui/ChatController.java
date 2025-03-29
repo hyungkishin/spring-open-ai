@@ -1,7 +1,9 @@
 package com.myai.openai.ui;
 
 import com.myai.openai.application.ChatService;
+import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class ChatController {
     @GetMapping("/chatmessage")
     public String chatMessage(@RequestParam("message") String message) {
         return chatService.chatMessage(message);
+    }
+
+    @GetMapping("/chatplace")
+    public String chatPlaceMessage(@ModelAttribute ChatRequest request) {
+        return chatService.chatPlaceMessage(request);
     }
 
 }

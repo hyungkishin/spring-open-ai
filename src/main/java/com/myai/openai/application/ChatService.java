@@ -1,9 +1,10 @@
 package com.myai.openai.application;
 
-import org.apache.commons.lang3.ObjectUtils;
+import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class ChatService {
@@ -22,18 +23,25 @@ public class ChatService {
     }
 
     public String chatMessage(String message) {
-        ChatResponse chatResponse = chatClient.prompt()
-                .user(message)
-                .call()
-                .chatResponse();
-
-        if (!ObjectUtils.isEmpty(chatResponse)) {
-            return chatResponse
-                    .getResult()
-                    .getOutput()
-                    .getText();
-        }
-
-        return null;
+        return Objects.requireNonNull(chatClient.prompt()
+                        .user(message)
+                        .call()
+                        .chatResponse())
+                .getResult()
+                .getOutput()
+                .getText();
     }
+
+    public String chatPlaceMessage(final ChatRequest request) {
+        return Objects.requireNonNull(
+                        chatClient.prompt()
+                                .user(request.message())
+                                .system(sp -> sp.param("subject", request.subject()).param("tone", request.tone()))
+                                .call()
+                                .chatResponse())
+                .getResult()
+                .getOutput()
+                .getText();
+    }
+
 }
