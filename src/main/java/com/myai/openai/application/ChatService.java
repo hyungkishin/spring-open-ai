@@ -2,6 +2,7 @@ package com.myai.openai.application;
 
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -42,6 +43,13 @@ public class ChatService {
                 .getResult()
                 .getOutput()
                 .getText();
+    }
+
+    public ChatResponse chatJsonMessage(String message) {
+        return chatClient.prompt()
+                .user(message)
+                .call()
+                .chatResponse();
     }
 
 }
