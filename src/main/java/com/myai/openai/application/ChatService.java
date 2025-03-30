@@ -4,8 +4,13 @@ import com.myai.openai.entity.Answer;
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.converter.ListOutputConverter;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -72,6 +77,27 @@ public class ChatService {
                 )
                 .call()
                 .entity(Answer.class);
+    }
+
+    /**
+     * 응답의 형태를 List 형식으로 받기
+     */
+    public List<String> chatList(String message) {
+        return chatClient.prompt()
+                .user(message)
+                .call()
+                .entity(new ListOutputConverter(new DefaultConversionService()));
+    }
+
+    /**
+     * 응답의 형태를 Map 형식으로 받기
+     */
+    public Map<String, String> chatMap(String message) {
+        return chatClient.prompt()
+                .user(message)
+                .call()
+                .entity(new ParameterizedTypeReference<>() {
+                });
     }
 
 }

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 public class ChatController {
 
@@ -47,6 +50,16 @@ public class ChatController {
     @GetMapping("/recipe")
     public Answer recipe(String foodName, String question) {
         return chatService.recipe(foodName, question);
+    }
+
+    @GetMapping("/chat-list")
+    public List<String> chatList(String message) {
+        return chatService.chatList(message);
+    }
+
+    @GetMapping("/chat-list")
+    public Map<String, String> chatMap(String message) {
+        return chatService.chatMap(message);
     }
 
 }
