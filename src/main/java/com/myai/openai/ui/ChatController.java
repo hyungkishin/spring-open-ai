@@ -2,6 +2,7 @@ package com.myai.openai.ui;
 
 import com.myai.openai.application.ChatService;
 import com.myai.openai.entity.Answer;
+import com.myai.openai.entity.Movie;
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,13 +54,18 @@ public class ChatController {
     }
 
     @GetMapping("/chat-list")
-    public List<String> chatList(String message) {
+    public List<String> chatList(@RequestParam("message") String message) {
         return chatService.chatList(message);
     }
 
-    @GetMapping("/chat-list")
-    public Map<String, String> chatMap(String message) {
+    @GetMapping("/chat-map")
+    public Map<String, String> chatMap(@RequestParam("message") String message) {
         return chatService.chatMap(message);
+    }
+
+    @GetMapping("/chat-movie")
+    public List<Movie> chatMovie(@RequestParam("directorName") String directorName) {
+        return chatService.chatMovie(directorName);
     }
 
 }

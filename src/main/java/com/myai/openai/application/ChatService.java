@@ -1,6 +1,7 @@
 package com.myai.openai.application;
 
 import com.myai.openai.entity.Answer;
+import com.myai.openai.entity.Movie;
 import com.myai.openai.ui.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -100,4 +101,22 @@ public class ChatService {
                 });
     }
 
+    public List<Movie> chatMovie(String directorName) {
+        String template = """
+                    Generate a list of movies directed by {directorName}. if the director is unknown, return null.
+                    한국 영화는 한글로 표기해줘.
+                    Each movie should include a title and release year. {format}
+                """;
+
+        List<Movie> movies = chatClient.prompt()
+                .user(userSpec ->
+                        userSpec.text(template)
+                                .param("directorName", directorName)
+                                .param("format", "json")
+                )
+                .call()
+                .entity(new ParameterizedTypeReference<>() {
+                });
+        return movies;
+    }
 }
