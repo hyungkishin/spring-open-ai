@@ -1,3 +1,90 @@
 spring:
   application:
     name: openai
+
+  threads:
+    virtual:
+      enabled: true
+
+  ###################
+  # OpenAI
+  ###################
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+  mustache:
+    check-template-location: false
+
+logging:
+  level:
+    org:
+      atmosphere: warn
+
+vaadin:
+  launch-browser: true
+
+# spring.ai.openai.chat.options.functions=getBookingDetails,changeBooking,cancelBooking
+
+# spring.ai.openai.chat.enabled=false
+
+# Disable the OpenAI embedding when the local huggingface embedding (e.g. spring-ai-transformers-spring-boot-starter) is used.
+# spring.ai.openai.embedding.enabled=false
+
+###################
+# Azure OpenAI
+###################
+# spring.ai.azure.openai.api-key=${AZURE_OPENAI_API_KEY}
+# spring.ai.azure.openai.endpoint=${AZURE_OPENAI_ENDPOINT}
+# spring.ai.azure.openai.chat.options.deployment-name=gpt-4o
+
+###################
+# Mistral AI
+###################
+
+# spring.ai.mistralai.api-key=${MISTRAL_AI_API_KEY}
+# spring.ai.mistralai.chat.options.model=mistral-small-latest
+
+# spring.ai.mistralai.chat.options.model=mistral-small-latest
+# spring.ai.mistralai.chat.options.functions=getBookingDetails,changeBooking,cancelBooking
+# # spring.ai.retry.on-client-errors=true
+# # spring.ai.retry.exclude-on-http-codes=429
+
+###################
+# Vertex AI Gemini
+###################
+
+# spring.ai.vertex.ai.gemini.project-id=${VERTEX_AI_GEMINI_PROJECT_ID}
+# spring.ai.vertex.ai.gemini.location=${VERTEX_AI_GEMINI_LOCATION}
+# spring.ai.vertex.ai.gemini.chat.options.model=gemini-1.5-pro-001
+# # spring.ai.vertex.ai.gemini.chat.options.model=gemini-1.5-flash-001
+# spring.ai.vertex.ai.gemini.chat.options.transport-type=REST
+
+# spring.ai.vertex.ai.gemini.chat.options.functions=getBookingDetails,changeBooking,cancelBooking
+
+###################
+#  Milvus Vector Store
+###################
+# Change the dimentions to 384 if the local huggingface embedding (e.g. spring-ai-transformers-spring-boot-starter) is used.
+# spring.ai.vectorstore.milvus.embedding-dimension=384
+
+###################
+# PGVector
+###################
+# spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+# spring.datasource.username=postgres
+# spring.datasource.password=postgres
+
+###################
+# QDrant
+###################
+# spring.ai.vectorstore.qdrant.host=localhost
+# spring.ai.vectorstore.qdrant.port=6334
+
+###################
+# Chroma
+###################
+# spring.ai.vectorstore.chroma.client.host=http://localhost
+# spring.ai.vectorstore.chroma.client.port=8000

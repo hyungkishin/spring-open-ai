@@ -6,7 +6,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @TestPropertySource(properties = "spring.ai.openai.api-key=${OPENAI_API_KEY}")
-class OpenaiApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {
