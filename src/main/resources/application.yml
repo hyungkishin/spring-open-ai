@@ -12,9 +12,9 @@ spring:
   ai:
     openai:
       api-key: ${OPENAI_API_KEY}
-      chat:
-        options:
-          model: gpt-4o
+#      chat:
+#        options:
+#          model: gpt-4o
   mustache:
     check-template-location: false
 
@@ -22,6 +22,9 @@ logging:
   level:
     org:
       atmosphere: warn
+    springframework:
+      web: DEBUG
+      ai: DEBUG
 
 vaadin:
   launch-browser: true
