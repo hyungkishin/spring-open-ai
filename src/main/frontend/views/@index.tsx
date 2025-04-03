@@ -1,7 +1,6 @@
-import { Button, Notification, TextField } from '@vaadin/react-components';
-import { AssistantService } from 'Frontend/generated/endpoints.js';
-import { useSignal } from '@vaadin/hilla-react-signals';
-import type { ViewConfig } from '@vaadin/hilla-file-router/types.js';
+import {useSignal} from '@vaadin/hilla-react-signals';
+import type {ViewConfig} from '@vaadin/hilla-file-router/types.js';
+import {NavLink} from "react-router";
 
 export const config: ViewConfig = {
   menu: {
@@ -14,19 +13,10 @@ export default function MainView() {
 
   return (
     <>
-      <TextField
-        label="Your name"
-        onValueChanged={(e) => {
-          name.value = e.detail.value;
-        }}
-      />
-      <Button
-        onClick={async () => {
-          const serverResponse = await AssistantService.chat(name.value);
-          Notification.show(serverResponse!!);
-        }}>
-        Say hello
-      </Button>
+        <li>
+            <NavLink to="/open-chat">open chat</NavLink>
+        </li>
+
     </>
   );
 }

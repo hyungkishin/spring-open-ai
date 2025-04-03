@@ -27,6 +27,7 @@ public class LoggingAdvisor implements CallAroundAdvisor, StreamAroundAdvisor {
 		AdvisedResponse response = chain.nextAroundCall(advisedRequest);
 		System.out.println("\nResponse: " + response);
 		return response;
+
 	}
 
 	@Override
