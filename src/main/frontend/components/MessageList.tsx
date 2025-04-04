@@ -9,7 +9,6 @@ interface MessageListProps {
 export default function MessageList({ messages, className }: MessageListProps) {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
-  // Automatically scroll down whenever the messages change
   useEffect(() => {
     if (endOfMessagesRef.current) {
       endOfMessagesRef.current.scrollIntoView({ behavior: 'smooth' });

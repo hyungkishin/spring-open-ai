@@ -17,57 +17,50 @@ export default function OpenChatView() {
     const [working, setWorking] = useState(false);
     const [messages, setMessages] = useState<MessageItem[]>([{
         role: 'assistant',
-        content: '안녕하세요 ! 무었을 도와드릴까요 ?'
-    }]);
+        content: `안녕하세요 ! 무었을 도와드릴까요 ?`
+    }])
 
     function appendToLatestMessage(chunk: string | undefined) {
         setMessages(messages => {
-            const latestMessage = messages[messages.length - 1];
-            latestMessage.content += chunk;
-            return [...messages.slice(0, -1), latestMessage];
-        });
+            const latestMessage = messages[messages.length - 1]
+            latestMessage.content += chunk
+            return [...messages.slice(0, -1), latestMessage]
+        })
     }
 
     function addMessage(message: MessageItem) {
-        setMessages(messages => [...messages, message]);
+        setMessages(messages => [...messages, message])
     }
 
     async function sendMessage(message: string) {
-        setWorking(true);
+        setWorking(true)
         addMessage({
             role: 'user',
             content: message
-        });
-        let first = true;
+        })
+        let first = true
         AssistantService.chat(chatId, message)
             .onNext(token => {
                 if (first && token) {
                     addMessage({
                         role: 'assistant',
                         content: token
-                    });
+                    })
 
-                    first = false;
+                    first = false
                 } else {
-                    appendToLatestMessage(token);
+                    appendToLatestMessage(token)
                 }
             })
             .onError(() => setWorking(false))
-            .onComplete(() => setWorking(false));
+            .onComplete(() => setWorking(false))
     }
 
     return (
         <>
             <MessageList messages={messages} className="flex-grow overflow-scroll"/>
             <MessageInput onSubmit={e => sendMessage(e.detail.value)} className="px-0" disabled={working}/>
-            <style>{`
-            .card-grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-              gap: 1em;
-            }
-            `}</style>
         </>
-    );
+    )
 
 }
