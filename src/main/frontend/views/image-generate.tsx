@@ -91,6 +91,7 @@ export default function ImageGenerate() {
 
     const downloadImage = (imageUrl: string) => {
         window.location.href = `/v1/images/download-file?url=${encodeURIComponent(imageUrl)}`
+        Notification.show('이미를 다운로드 하였습니다 🥰', {position: "middle"})
     }
 
     return (
