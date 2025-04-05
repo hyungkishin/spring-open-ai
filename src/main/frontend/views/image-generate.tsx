@@ -13,7 +13,7 @@ import {useEffect, useState} from "react"
 
 export const config: ViewConfig = {
     menu: {
-        title: "image generate",
+        title: "이미지 생성기",
     },
 }
 

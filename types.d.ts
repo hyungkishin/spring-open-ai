@@ -1,3 +1,6 @@
+import * as React from "react";
+import "react-markdown";
+
 declare module '*.module.css' {
   declare const styles: Record<string, string>;
   export default styles;
@@ -68,5 +71,21 @@ declare module '*.css?inline' {
 declare module 'csstype' {
   interface Properties {
     [index: `--${string}`]: any;
+  }
+}
+
+declare module "react-markdown" {
+  interface Components {
+    /**
+     * 블록 수식 컴포넌트 ($$...$$)
+     * @param value - KaTeX 수식 문자열
+     */
+    math?: React.FC<{ value: string }>;
+
+    /**
+     * 인라인 수식 컴포넌트 ($...$)
+     * @param value - KaTeX 수식 문자열
+     */
+    inlineMath?: React.FC<{ value: string }>;
   }
 }

@@ -8,7 +8,7 @@ import MessageList from "Frontend/components/MessageList";
 
 export const config: ViewConfig = {
     menu: {
-        title: 'open chat'
+        title: 'openAi 와 채팅하기'
     }
 }
 

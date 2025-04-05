@@ -26,6 +26,9 @@ logging:
 vaadin:
   launch-browser: true
 
+upload:
+  path: src/main/resources/static/uploads/
+
 # spring.ai.openai.chat.options.functions=getBookingDetails,changeBooking,cancelBooking
 
 # spring.ai.openai.chat.enabled=false
