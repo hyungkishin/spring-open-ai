@@ -9,22 +9,6 @@ export const config: ViewConfig = {
     },
 }
 
-const mathJaxConfig = {
-    loader: {load: ["input/tex", "output/svg"]},
-    tex: {
-        packages: { "[+]": ["html"] },
-        inlineMath: [
-            ['$', '$'],
-            ['\\(', '\\)']
-        ],
-        displayMath: [
-            ['$$', '$$'],
-            ['\\[', '\\]']
-        ],
-        processEscapes: true,
-    },
-}
-
 function ImageAnalysis() {
     const [loading, setLoading] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
@@ -65,14 +49,6 @@ function ImageAnalysis() {
         }
     }, [])
 
-    const renderMathJax = () => {
-        return (
-            <MathNode>
-                {analysisText}
-            </MathNode>
-        )
-    }
-
     return (
         <div className="container mt-5">
             <h2>이미지 업로드 및 분석</h2>
@@ -108,9 +84,13 @@ function ImageAnalysis() {
                             </div>
                             <div className="col-md-6">
                                 <h5>분석 내용</h5>
-                                {renderMathJax()}
+                                <MathNode>
+                                    {analysisText}
+                                </MathNode>
                             </div>
                         </div>
+
+                        <hr/>
 
                         {youtubeUrls.length > 0 && (
                             <div>

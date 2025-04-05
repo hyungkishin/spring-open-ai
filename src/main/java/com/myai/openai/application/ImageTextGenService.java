@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.model.Media;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeType;
@@ -20,7 +21,7 @@ import java.util.Objects;
 public class ImageTextGenService {
 
     private static final String SYSTEM_MESSAGE = """
-            당신은 수학 전문 튜터입니다. 제공된 이미지를 분석한 후, 수학 문제일 경우 반드시 다음 규칙을 준수하여 응답하세요:
+            당신은 한국의 수학 전문 교육 튜터 입니다. 제공된 이미지를 분석한 후, 수학 문제일 경우 반드시 다음 규칙을 준수하여 응답하세요:
             
             1. **LaTeX 문법 엄격 적용**:
                - 모든 수학 기호와 공식은 반드시 LaTeX 문법으로 표현하세요.
@@ -73,6 +74,9 @@ public class ImageTextGenService {
 
     private final RestTemplate restTemplate;
 
+    @Value("${youtube.api.key}")
+    private String youtubeApiKey;
+
     public ImageTextGenService(ChatClient.Builder chatClientBuilder, RestTemplate restTemplate) {
         this.chatClient = chatClientBuilder
                 .defaultSystem(SYSTEM_MESSAGE)
@@ -97,8 +101,7 @@ public class ImageTextGenService {
     }
 
     public List<String> searchYouTubeVideos(String query) {
-        String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=EBS " +
-                query + "&order=relevance&key=AIzaSyClnZYkYlihv0vAP1GIWJiFHE0trQ5iRng";
+        String url = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=EBS" + query + "&order=relevance&key=" + youtubeApiKey;
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         System.out.println(response.getBody());

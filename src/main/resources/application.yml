@@ -29,6 +29,10 @@ vaadin:
 upload:
   path: src/main/resources/static/uploads/
 
+youtube:
+  api:
+    key: ${YOUTUBE_API_KEY}
+
 # spring.ai.openai.chat.options.functions=getBookingDetails,changeBooking,cancelBooking
 
 # spring.ai.openai.chat.enabled=false
