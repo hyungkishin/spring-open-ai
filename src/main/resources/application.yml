@@ -9,9 +9,17 @@ spring:
   ###################
   # OpenAI
   ###################
+
   ai:
-    openai:
+    openai: ## openAi API Key
       api-key: ${OPENAI_API_KEY}
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
+        initialize-schema: true
+
   mustache:
     check-template-location: false
 

@@ -1,20 +1,11 @@
-networks:
-  net:
-    driver: bridge
 services:
-  server:
-    image: ghcr.io/chroma-core/chroma:latest
+  pgvector:
+    image: 'pgvector/pgvector:pg16'
     environment:
-      - IS_PERSISTENT=TRUE
-    volumes:
-      # Default configuration for persist_directory in chromadb/config.py
-      # Currently it's located in "/chroma/chroma/"
-      - chroma-data:/chroma/chroma/
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    labels:
+      - "org.springframework.boot.service-connection=postgres"
     ports:
-      - 8000:8000
-    networks:
-      - net
-
-volumes:
-  chroma-data:
-    driver: local
+      - '5432:5432'
